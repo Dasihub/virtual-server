@@ -35,7 +35,7 @@ class UserController {
 		} catch (e) {
 			console.log(e)
 			res.status(500).json({
-				data: true,
+				data: false,
 				message: 'Ошибка в сервере',
 				type: 'error'
 			})
@@ -80,7 +80,7 @@ class UserController {
 		} catch (e) {
 			console.log(e)
 			res.status(500).json({
-				data: true,
+				data: {},
 				message: 'Ошибка в сервере',
 				type: 'error'
 			})
@@ -120,7 +120,24 @@ class UserController {
 		} catch (e) {
 			console.log(e)
 			res.status(500).json({
-				data: true,
+				data: {},
+				message: 'Ошибка в сервере',
+				type: 'error'
+			})
+		}
+	}
+
+	async logout(req, res) {
+		try {
+			res.clearCookie('token').json({
+				data: {},
+				type: 'success',
+				message: 'Вы успешно вышли из аккаунта!'
+			})
+		} catch (e) {
+			console.log(e)
+			res.status(500).json({
+				data: {},
 				message: 'Ошибка в сервере',
 				type: 'error'
 			})
