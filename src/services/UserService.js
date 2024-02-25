@@ -1,14 +1,23 @@
+const bcrypt = require('bcrypt')
 const UserModel = require('../models/userModel')
 
 class UserService {
-	async userByEmail(email) {
+	async userByLogin(login) {
 		try {
-			const user = UserModel.findOne({ email })
-			console.log(user)
+			return  await UserModel.findOne({ login }).exec()
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
+	async createUser(name, login, password) {
+		try {
+			const hashPassword = await bcrypt.hash(password, 7)
+			return  await UserModel.create({name, login, password: hashPassword})
 		} catch (e) {
 			console.log(e)
 		}
 	}
 }
 
-module.exports = UserService
+module.exports = new UserService()

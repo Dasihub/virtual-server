@@ -15,6 +15,8 @@ app.use(logger('dev'))
 app.use(cookieParser())
 app.use(cors())
 
+app.use('/api', require('./routes'))
+
 const connect = async () => {
 	try {
 		await mongoose.connect(process.env.MONGO)
